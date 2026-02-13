@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Romantic Valentine theme - warm reds, pinks, and cream */
+    --background: oklch(98% 0.01 30);
+    --foreground: oklch(25% 0.02 30);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(25% 0.02 30);
+    --popover: oklch(100% 0 0);
+    --popover-foreground: oklch(25% 0.02 30);
+    --primary: oklch(55% 0.22 15);
+    --primary-foreground: oklch(100% 0 0);
+    --secondary: oklch(95% 0.02 30);
+    --secondary-foreground: oklch(25% 0.02 30);
+    --muted: oklch(96% 0.01 30);
+    --muted-foreground: oklch(50% 0.01 30);
+    --accent: oklch(92% 0.05 340);
+    --accent-foreground: oklch(25% 0.02 30);
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(100% 0 0);
+    --border: oklch(90% 0.02 30);
+    --input: oklch(90% 0.02 30);
+    --ring: oklch(55% 0.22 15);
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: oklch(15% 0.02 30);
+    --foreground: oklch(95% 0.01 30);
+    --card: oklch(18% 0.02 30);
+    --card-foreground: oklch(95% 0.01 30);
+    --popover: oklch(18% 0.02 30);
+    --popover-foreground: oklch(95% 0.01 30);
+    --primary: oklch(65% 0.20 15);
+    --primary-foreground: oklch(15% 0.02 30);
+    --secondary: oklch(22% 0.02 30);
+    --secondary-foreground: oklch(95% 0.01 30);
+    --muted: oklch(22% 0.02 30);
+    --muted-foreground: oklch(65% 0.01 30);
+    --accent: oklch(30% 0.05 340);
+    --accent-foreground: oklch(95% 0.01 30);
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(95% 0.01 30);
+    --border: oklch(25% 0.02 30);
+    --input: oklch(25% 0.02 30);
+    --ring: oklch(65% 0.20 15);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer utilities {
+  .shadow-romantic {
+    box-shadow: 0 10px 40px -10px oklch(55% 0.22 15 / 0.3);
+  }
+}
+
+/* Polaroid frame styling */
+.polaroid-frame {
+  position: relative;
+  background: oklch(100% 0 0);
+  padding: 1rem;
+  padding-bottom: 3rem;
+  box-shadow: 
+    0 4px 6px -1px oklch(0% 0 0 / 0.1),
+    0 2px 4px -1px oklch(0% 0 0 / 0.06),
+    0 10px 30px -5px oklch(55% 0.22 15 / 0.15);
+  transition: all 0.3s ease;
+  transform: rotate(0deg);
+}
+
+.dark .polaroid-frame {
+  background: oklch(20% 0.02 30);
+  box-shadow: 
+    0 4px 6px -1px oklch(0% 0 0 / 0.3),
+    0 2px 4px -1px oklch(0% 0 0 / 0.2),
+    0 10px 30px -5px oklch(65% 0.20 15 / 0.2);
+}
+
+.polaroid-frame:nth-child(odd) {
+  transform: rotate(-1deg);
+}
+
+.polaroid-frame:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.polaroid-frame:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px -10px oklch(0% 0 0 / 0.15),
+    0 10px 20px -5px oklch(55% 0.22 15 / 0.25);
+}
+
+.dark .polaroid-frame:hover {
+  box-shadow: 
+    0 20px 40px -10px oklch(0% 0 0 / 0.4),
+    0 10px 20px -5px oklch(65% 0.20 15 / 0.3);
+}
+
+.polaroid-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.polaroid-caption {
+  margin-top: 0.75rem;
+  min-height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.polaroid-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(100% 0 0 / 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.polaroid-frame:hover .polaroid-shine {
+  left: 100%;
+}

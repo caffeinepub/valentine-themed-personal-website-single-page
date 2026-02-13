@@ -1,0 +1,23 @@
+{
+  "frontend/src/index.css": "Global styles with romantic Valentine theme using OKLCH colors, custom polaroid frame styling with hover effects and subtle shine animation, and serif typography for headings.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with Playfair Display serif font, romantic shadow utilities, and float animation for decorative elements.",
+  "frontend/src/valentine/types.ts": "TypeScript interface defining the structure of Valentine content including names, headline, letter, reasons, and memory captions.",
+  "frontend/src/valentine/contentDefaults.ts": "Default English content for the Valentine site including sample love letter, reasons, and empty captions for personalization.",
+  "frontend/src/hooks/useLocalStorageState.ts": "Custom React hook for persisting state to localStorage with JSON serialization and error handling.",
+  "frontend/src/components/valentine/ValentineLayout.tsx": "Layout wrapper component applying background texture, gradient overlay, and consistent spacing for all Valentine sections.",
+  "frontend/src/components/valentine/HeroSection.tsx": "Hero section with animated decorative hearts, headline, and call-to-action button that scrolls to the love letter.",
+  "frontend/src/components/valentine/LoveLetterSection.tsx": "Love letter section displaying a card with recipient name, letter body, and sender signature with romantic styling.",
+  "frontend/src/components/valentine/MemoriesGallery.tsx": "Responsive photo grid component displaying exactly 6 memory images with polaroid-style frames, now using safe slice-and-pad normalization to handle any input array length (< 6, = 6, > 6) without negative-length errors, plus hover effects, lightbox functionality, and image error fallback handling.",
+  "frontend/src/components/valentine/MemoriesSection.tsx": "Section wrapper for the memories gallery that accepts image sources and captions as props and passes them to MemoriesGallery while maintaining the existing heading and layout.",
+  "frontend/src/components/valentine/ReasonsSection.tsx": "Section displaying a grid of cards, each containing one reason for love with heart icons and hover effects.",
+  "frontend/src/components/valentine/FooterSection.tsx": "Footer with closing message, sender name, and attribution link with UTM tracking to caffeine.ai.",
+  "frontend/src/components/valentine/EditPanel.tsx": "Side sheet panel with form controls for editing all Valentine content, now with proper TypeScript event handler typing (ChangeEvent imported from 'react'), safe 6-slot caption array normalization, and guarded memory photo rendering that handles any array length without crashes.",
+  "frontend/src/App.tsx": "Main application component with top-level guards for publish-block detection and asset smoke-check, rendering appropriate error screens or the full Valentine SPA with all sections, localStorage-backed content state, and smooth scroll navigation.",
+  "frontend/index.html": "HTML entry point with Google Fonts preconnect for Playfair Display and Inter fonts.",
+  "frontend/src/hooks/useMemoryImages.ts": "Custom React hook managing 6 memory photo sources with localStorage persistence, automatic migration from old placeholder to new 6th photo, asset path normalization for live deployment, and methods to set/reset individual images or all at once.",
+  "frontend/src/components/valentine/MemoryLightbox.tsx": "Lightweight modal component using shadcn Dialog to display a selected memory photo in full-screen view with optional caption overlay, close button, and ESC/overlay-click dismissal.",
+  "frontend/src/utils/assetSmokeCheck.ts": "Production asset smoke-check utility that preloads critical static assets (backgrounds, user photos, fallbacks) with root-absolute URLs and returns pass/fail diagnostics with timeout handling, aligned with DEPLOYMENT.md requirements.",
+  "frontend/src/components/valentine/DeploymentHealthOverlay.tsx": "Lightweight UI overlay component displaying asset-load failure messages with failed asset groups and detailed file list, now with guards for empty arrays to prevent crashes when no failures are present.",
+  "frontend/src/components/valentine/PublishBlockedScreen.tsx": "Dedicated blocking screen component that explains deployment was prevented due to internal build/config errors, using shadcn Card, Alert, and Button components with clear next-steps guidance.",
+  "frontend/DEPLOYMENT.md": "Comprehensive go-live guide documenting build verification steps, deployment commands, live URL retrieval, production smoke-check behavior with detailed success/failure cases, error handling protocols, and troubleshooting for the Valentine SPA deployment to Internet Computer."
+}

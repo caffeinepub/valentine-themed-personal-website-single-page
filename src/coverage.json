@@ -1,0 +1,68 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-13T23:51:09.096Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-15",
+        "summary": "Fix all TypeScript/compile-time errors in Draft Version 7 so the frontend builds successfully.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/valentine/EditPanel.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/valentine/EditPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-16",
+        "summary": "Fix runtime errors and edge cases in the Memories gallery and Edit Panel so the app never crashes if `images`, `memoryCaptions`, or `reasons` arrays are shorter/longer than expected (including avoiding negative-length array creation and out-of-bounds indexing).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/valentine/MemoriesGallery.tsx",
+          "frontend/src/components/valentine/EditPanel.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/valentine/MemoriesGallery.tsx",
+          "frontend/src/components/valentine/EditPanel.tsx"
+        ]
+      },
+      {
+        "id": "REQ-17",
+        "summary": "Ensure the production asset smoke-check and its failure UI do not produce false negatives due to pathing or missing assets, and that the app loads normally when all required static assets exist under `frontend/public/assets/`.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/assetSmokeCheck.ts",
+          "frontend/src/hooks/useMemoryImages.ts",
+          "frontend/src/components/valentine/DeploymentHealthOverlay.tsx",
+          "frontend/DEPLOYMENT.md",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/valentine/DeploymentHealthOverlay.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/valentine/DeploymentHealthOverlay.tsx",
+    "frontend/src/components/valentine/EditPanel.tsx",
+    "frontend/src/components/valentine/MemoriesGallery.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

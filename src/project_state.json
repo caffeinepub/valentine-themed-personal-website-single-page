@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 17,
+  "summary": "Build and publish a single-page Valentine website for the user's valentine, including in-app personalization and a Memories photo gallery, and deploy it live when the build system allows.",
+  "architectural_notes": [
+    "User requested to publish/go live; proceed with deployment when build system allows."
+  ],
+  "known_issues": [
+    "Live deployment/build is currently blocked by an internal configuration/build system error (requires Caffeine team fix).",
+    "Draft Version 7 contains errors that need to be fixed before publishing."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-a-responsive-single-page-valentine-website-with-romantic-sections-1-hero-with-headline-and-call-to-action-button-scrolls-to-message-2-love-letter-message-section-3-memories-section-image-gallery-4-reasons-i-love-you-section-list-of-cards-and-5-footer-with-a-closing-note",
+      "title": "Create a responsive, single-page Valentine website with romantic sections: (1) Hero with headline and call-to-action button (scrolls to message), (2) Love letter/message section, (3) Memories section (image gallery), (4) Reasons I love you section (list of cards), and (5) Footer with a closing note.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-simple-in-app-personalization-controls-no-login-that-allow-the-user-to-edit-recipient-name-sender-name-hero-headline-love-letter-body-text-and-the-list-items-for-reasons-i-love-you-changes-should-update-the-preview-immediately-and-persist-across-page-refresh-using-browser-localstorage",
+      "title": "Add simple in-app personalization controls (no login) that allow the user to edit: recipient name, sender name, hero headline, love-letter body text, and the list items for 'Reasons I love you'. Changes should update the preview immediately and persist across page refresh using browser localStorage.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-an-image-gallery-in-the-memories-section-that-supports-6-images-using-static-assets-with-tasteful-frames-and-allows-the-user-to-optionally-add-short-captions-for-each-image-editable-in-the-personalization-controls-and-persisted-in-localstorage",
+      "title": "Implement an image gallery in the Memories section that supports 6 images using static assets (with tasteful frames) and allows the user to optionally add short captions for each image (editable in the personalization controls and persisted in localStorage).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-creative-valentine-visual-theme-across-the-site-colors-typography-spacing-and-decorative-motifs-using-tailwind-styling-do-not-use-a-blue-purple-primary-palette-the-theme-must-remain-consistent-across-all-sections-and-interactive-controls",
+      "title": "Apply a cohesive, creative Valentine visual theme across the site (colors, typography, spacing, and decorative motifs) using Tailwind styling; do not use a blue/purple primary palette. The theme must remain consistent across all sections and interactive controls.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-generated-images-see-image-requirements-to-the-app-as-static-assets-under-frontend-public-assets-generated-and-render-them-in-the-ui-e-g-background-texture-decorative-hearts-gallery-placeholders-without-routing-image-data-through-the-backend",
+      "title": "Add the generated images (see Image Requirements) to the app as static assets under frontend/public/assets/generated and render them in the UI (e.g., background texture, decorative hearts, gallery placeholders) without routing image data through the backend.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-5-user-uploaded-photos-img-20260102-194134-jpg-img-20260214-032137-jpg-img-20250220-045805-370-jpg-img-20260214-040600-jpg-img-20260214-040639-jpg-to-the-app-as-frontend-static-assets-and-display-them-in-the-memories-gallery-by-default-replacing-the-first-5-placeholder-images-keeping-6-total-gallery-tiles",
+      "title": "Add the 5 user-uploaded photos (IMG_20260102_194134.jpg, IMG_20260214_032137.jpg, IMG_20250220_045805_370.jpg, IMG_20260214_040600.jpg, IMG_20260214_040639.jpg) to the app as frontend static assets and display them in the Memories gallery by default (replacing the first 5 placeholder images), keeping 6 total gallery tiles.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-extend-the-memories-gallery-to-support-user-selected-photos-from-the-device-add-per-tile-photo-selection-controls-in-the-edit-content-panel-that-let-the-user-replace-any-of-the-6-memory-images-persist-the-chosen-images-across-refresh-using-browser-localstorage-and-allow-resetting-an-image-back-to-its-default",
+      "title": "Extend the Memories gallery to support user-selected photos from the device: add per-tile photo selection controls in the Edit Content panel that let the user replace any of the 6 memory images, persist the chosen images across refresh using browser localStorage, and allow resetting an image back to its default.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-memories-gallery-feel-more-special-by-enhancing-the-presentation-of-photos-with-a-romantic-cohesive-treatment-e-g-improved-frame-polaroid-styling-subtle-hover-shine-and-or-a-simple-click-to-view-larger-modal-while-keeping-the-existing-site-theme-consistent-and-responsive",
+      "title": "Make the Memories gallery feel more special by enhancing the presentation of photos with a romantic, cohesive treatment (e.g., improved frame/polaroid styling, subtle hover shine, and/or a simple click-to-view larger modal) while keeping the existing site theme consistent and responsive.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-default-6th-memories-gallery-image-the-placeholder-at-assets-generated-memory-06-dim-1200x800-png-with-an-additional-user-provided-photo-stored-as-a-frontend-static-asset-so-the-6th-last-tile-shows-a-real-photo-by-default",
+      "title": "Replace the current default 6th Memories gallery image (the placeholder at `/assets/generated/memory-06.dim_1200x800.png`) with an additional user-provided photo stored as a frontend static asset, so the 6th/last tile shows a real photo by default.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-newly-uploaded-photo-file-img-20260214-032137-1-jpg-as-a-frontend-static-asset-and-make-it-the-default-6th-image-in-the-memories-gallery-replacing-the-current-placeholder-assets-generated-memory-06-dim-1200x800-png-also-ensure-existing-users-who-already-have-the-placeholder-saved-in-localstorage-automatically-see-the-new-default-6th-photo-on-next-load-without-overwriting-any-custom-user-uploaded-image",
+      "title": "Add the newly uploaded photo file `IMG_20260214_032137-1.jpg` as a frontend static asset and make it the default 6th image in the Memories gallery, replacing the current placeholder `/assets/generated/memory-06.dim_1200x800.png`. Also ensure existing users who already have the placeholder saved in `localStorage` automatically see the new default 6th photo on next load (without overwriting any custom user-uploaded image).",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-valentine-site-is-ready-to-be-published-live-as-a-single-page-app-from-the-site-root-with-all-static-assets-including-user-photos-loading-correctly-when-accessed-via-a-deployed-url-no-broken-images-due-to-pathing",
+      "title": "Ensure the Valentine site is ready to be published live as a single-page app from the site root, with all static assets (including user photos) loading correctly when accessed via a deployed URL (no broken images due to pathing).",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-publish-go-live-with-the-current-valentine-single-page-app-build-so-it-is-accessible-as-a-live-site-url",
+      "title": "Publish (go live with) the current Valentine single-page app build so it is accessible as a live site URL.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-before-publishing-run-a-production-smoke-check-on-the-deployed-url-to-ensure-all-static-assets-load-correctly-including-generated-images-and-the-user-photos-in-the-memories-gallery-and-that-no-asset-paths-break-when-served-from-the-deployed-origin",
+      "title": "Before publishing, run a production smoke check on the deployed URL to ensure all static assets load correctly (including generated images and the user photos in the Memories gallery) and that no asset paths break when served from the deployed origin.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-if-publishing-is-blocked-by-the-known-internal-configuration-build-system-error-surface-that-blockage-as-the-publish-result-with-a-clear-failure-reason-and-do-not-proceed-with-partial-deployment",
+      "title": "If publishing is blocked by the known internal configuration/build system error, surface that blockage as the publish result (with a clear failure reason) and do not proceed with partial deployment.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-all-typescript-compile-time-errors-in-draft-version-7-so-the-frontend-builds-successfully",
+      "title": "Fix all TypeScript/compile-time errors in Draft Version 7 so the frontend builds successfully.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-runtime-errors-and-edge-cases-in-the-memories-gallery-and-edit-panel-so-the-app-never-crashes-if-images-memorycaptions-or-reasons-arrays-are-shorter-longer-than-expected-including-avoiding-negative-length-array-creation-and-out-of-bounds-indexing",
+      "title": "Fix runtime errors and edge cases in the Memories gallery and Edit Panel so the app never crashes if `images`, `memoryCaptions`, or `reasons` arrays are shorter/longer than expected (including avoiding negative-length array creation and out-of-bounds indexing).",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-production-asset-smoke-check-and-its-failure-ui-do-not-produce-false-negatives-due-to-pathing-or-missing-assets-and-that-the-app-loads-normally-when-all-required-static-assets-exist-under-frontend-public-assets",
+      "title": "Ensure the production asset smoke-check and its failure UI do not produce false negatives due to pathing or missing assets, and that the app loads normally when all required static assets exist under `frontend/public/assets/`.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a valentine-themed website (personalized for the user's valentine).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Allow the user to add their own personal photos to the Memories gallery (replacing the built-in placeholders) to make the page more special.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add one more photo to the Memories gallery to fill the 6th/last tile (so all six tiles use real photos instead of a placeholder).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Deploy/publish the Valentine website live (make it accessible as a live site).",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Valentine-themed personal website (single-page)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

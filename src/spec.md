@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Fix Draft Version 7 frontend build/runtime issues so it compiles cleanly, doesn’t crash on gallery/editor edge cases, and correctly validates required static assets in production.
+**Goal:** Publish Version 9 successfully by ensuring the live deployment uses a valid production domain/slug.
 
 **Planned changes:**
-- Fix all TypeScript/compile-time errors preventing the frontend from building (including React event handler typing issues under the automatic JSX runtime).
-- Harden the Memories gallery and Edit Panel against mismatched array lengths (`images`, `memoryCaptions`, `reasons`) to avoid out-of-bounds access and invalid array-length calculations while still rendering expected UI (e.g., 6 memory tiles).
-- Correct/align production asset smoke-check URL pathing and ensure the Deployment Health overlay only appears for genuinely missing assets and lists failures without crashing.
+- Add frontend validation for the production slug during the Version 9 publish flow (5–50 characters; only letters, numbers, and hyphens).
+- If the slug is missing or invalid, block publishing and show a clear English error message explaining the rules and asking for a corrected slug.
+- Allow publishing to proceed when a valid slug is provided (no slug-validation-related blockage).
 
-**User-visible outcome:** The app builds successfully, the Memories gallery and editor remain stable even with incomplete/extra data, and the site loads normally when required assets are present (with a clear, non-crashing overlay only when assets are truly missing).
+**User-visible outcome:** When attempting to publish Version 9, users are prevented from going live with an invalid/missing slug and see an English message describing the required slug format; with a valid slug, publishing proceeds.

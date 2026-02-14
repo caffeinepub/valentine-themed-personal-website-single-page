@@ -1,15 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 17,
-  "summary": "Build and publish a single-page Valentine website for the user's valentine, including in-app personalization and a Memories photo gallery, and deploy it live when the build system allows.",
+  "projectStateVersion": 21,
+  "summary": "Draft/Testing Version 9 has been built and is ready; the user requests publishing Version 9 live (go-live) with no further adjustments.",
   "architectural_notes": [
-    "User requested to publish/go live; proceed with deployment when build system allows."
+    "Production deployment for Draft Version 8 succeeded; site is live in production.",
+    "Deployment/domain slug must be 5–50 characters and contain only letters, numbers, and hyphens.",
+    "Version 9 build/deployment is up and ready for testing.",
+    "User confirmed no further adjustments are needed and requested publishing Version 9 live."
   ],
   "known_issues": [
-    "Live deployment/build is currently blocked by an internal configuration/build system error (requires Caffeine team fix).",
-    "Draft Version 7 contains errors that need to be fixed before publishing."
+    "Production domain/slug validation error: must be 5–50 characters and contain only letters, numbers, and hyphens."
   ],
-  "isFixRequest": true,
+  "isFixRequest": false,
   "existing_features": [
     {
       "id": "feature-create-a-responsive-single-page-valentine-website-with-romantic-sections-1-hero-with-headline-and-call-to-action-button-scrolls-to-message-2-love-letter-message-section-3-memories-section-image-gallery-4-reasons-i-love-you-section-list-of-cards-and-5-footer-with-a-closing-note",
@@ -146,6 +148,22 @@
         "REQ-17"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-restore-the-project-codebase-and-frontend-static-assets-to-match-exactly-what-was-shipped-as-draft-version-4-rollback-from-the-current-draft-production-version-8-this-includes-reverting-any-ui-ux-content-defaults-personalization-controls-gallery-behavior-deployment-health-checks-overlays-and-asset-lists-that-differ-from-draft-version-4",
+      "title": "Restore the project codebase and frontend static assets to match exactly what was shipped as Draft Version 4 (rollback from the current Draft/Production Version 8). This includes reverting any UI/UX, content defaults, personalization controls, gallery behavior, deployment health checks/overlays, and asset lists that differ from Draft Version 4.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-publishing-version-9-ensure-the-production-domain-slug-used-for-the-live-deployment-passes-validation-5-50-characters-only-letters-numbers-and-hyphens-if-the-requested-slug-is-missing-or-invalid-block-publishing-and-show-a-clear-user-facing-error-message-in-english-explaining-the-rule-and-requesting-a-corrected-slug",
+      "title": "When publishing Version 9, ensure the production domain/slug used for the live deployment passes validation (5–50 characters; only letters, numbers, and hyphens). If the requested slug is missing or invalid, block publishing and show a clear, user-facing error message in English explaining the rule and requesting a corrected slug.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -170,6 +188,26 @@
     {
       "id": "AR-4",
       "summary": "Deploy/publish the Valentine website live (make it accessible as a live site).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Revert/restore the project to Draft Version 4 (rollback from current Version 8).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Deploy the restored Draft Version 4 build as the active Draft deployment so the draft URL serves Draft Version 4 (not Draft Version 8).",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Publish/go-live with Version 9 (make Version 9 the live deployed Valentine site).",
       "reqIds": [],
       "status": "pending"
     }

@@ -1,82 +1,26 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Draft V7 fix: TS build errors, gallery/editor runtime guards, and asset smoke-check correctness",
+  "title": "Version 9 publish: production slug validation gate (frontend)",
   "requirements": [
     {
-      "id": "REQ-15",
-      "summary": "Resolve all remaining TypeScript/compile-time issues so the frontend builds cleanly under the automatic JSX runtime.",
+      "id": "REQ-20",
+      "summary": "Validate the production domain/slug (5–50 chars; letters/numbers/hyphens) and block the Version 9 publish action with a clear English error when missing/invalid.",
       "acceptanceCriteria": [
-        "`frontend` TypeScript compilation succeeds with no errors (e.g., `npm run build` / equivalent build step completes).",
-        "No TS errors remain related to React type usage in event handlers (e.g., avoid using `React.ChangeEvent` without importing the `React` namespace under the automatic JSX runtime)."
+        "If a production slug is invalid (wrong length or contains characters other than letters/numbers/hyphens), publishing does not proceed.",
+        "The user sees an English error message stating: the slug must be 5–50 characters and contain only letters, numbers, and hyphens.",
+        "If a valid slug is provided, the publish flow can proceed (no slug-validation-related blockage)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/valentine/EditPanel.tsx",
-          "operation": "modify",
-          "description": "Fix TS event handler typing to avoid relying on the `React` namespace (e.g., import `ChangeEvent` type from `react` or explicitly import the React namespace) and ensure all handler signatures compile under the automatic JSX runtime."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Address any remaining TS typing issues surfaced during build (state typing, effect dependencies, and component prop wiring) so the application compiles without errors."
-        }
-      ]
-    },
-    {
-      "id": "REQ-16",
-      "summary": "Harden Memories gallery and Edit Panel rendering against mismatched array lengths to prevent crashes and out-of-bounds access.",
-      "acceptanceCriteria": [
-        "The Memories gallery renders without throwing if `images.length` is not exactly 6 (including when `images.length > 6`), and still displays 6 tiles.",
-        "The Edit Panel renders without throwing if `memoryCaptions.length` is not exactly 6, and caption inputs remain usable.",
-        "No console errors caused by array length calculations or undefined indexing during normal interaction (open editor, add/remove reasons, open lightbox)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/valentine/MemoriesGallery.tsx",
-          "operation": "modify",
-          "description": "Replace negative-length padding logic with safe slice+pad normalization so exactly 6 tiles render regardless of `images`/`captions` length (handle `< 6`, `= 6`, and `> 6`), and ensure lightbox opens with a defined src/caption (no out-of-bounds indexing)."
+          "path": "frontend/src/utils/validateProductionSlug.ts",
+          "operation": "create",
+          "description": "Add a small reusable validator (length 5–50; only letters/numbers/hyphens) that returns validity + a user-facing English error string for invalid/missing slugs."
         },
         {
           "path": "frontend/src/components/valentine/EditPanel.tsx",
           "operation": "modify",
-          "description": "Normalize `localContent.memoryCaptions` to a safe 6-slot array for controlled inputs (use empty-string fallbacks when missing), render exactly 6 memory photo rows even if `memoryImages` length differs, and guard all reads/writes to avoid undefined indexing during interaction."
-        }
-      ]
-    },
-    {
-      "id": "REQ-17",
-      "summary": "Make the production asset smoke-check and failure UI accurate (no false negatives) with correct site-root asset URLs and aligned required-asset lists.",
-      "acceptanceCriteria": [
-        "When the required assets documented in `frontend/DEPLOYMENT.md` are present, the asset smoke-check passes and the Valentine SPA renders (no Deployment Health overlay).",
-        "If an asset is genuinely missing, the Deployment Health overlay lists the failing asset URLs and groups without crashing the app.",
-        "Asset URLs used by the smoke-check match the app’s deployed site-root pathing conventions (root-absolute `/assets/...`), preventing broken images due to relative paths."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/utils/assetSmokeCheck.ts",
-          "operation": "modify",
-          "description": "Align the smoke-check required asset list with `frontend/DEPLOYMENT.md` and the actual files under `frontend/public/assets/`; keep URLs root-absolute (`/assets/...`) and ensure results are stable (no spurious failures due to checking non-existent paths)."
-        },
-        {
-          "path": "frontend/src/hooks/useMemoryImages.ts",
-          "operation": "modify",
-          "description": "Update the default memory image path list to reference only static assets that are actually required/deployed under `frontend/public/assets/`, keeping root-absolute `/assets/...` conventions to prevent broken defaults and false smoke-check failures."
-        },
-        {
-          "path": "frontend/src/components/valentine/DeploymentHealthOverlay.tsx",
-          "operation": "modify",
-          "description": "Harden the overlay rendering for empty/partial diagnostics (e.g., no failedGroups or no failedAssets) so it never crashes and always lists failing asset URLs/groups when present."
-        },
-        {
-          "path": "frontend/DEPLOYMENT.md",
-          "operation": "modify",
-          "description": "Update the documented 'required assets' list to match the actual asset smoke-check inputs and the expected contents of `frontend/public/assets/` so teams can verify deployments without triggering false negatives."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Ensure the asset smoke-check gating logic cleanly transitions between loading/overlay/SPA states without throwing, and that the SPA renders normally when the smoke-check passes."
+          "description": "Add a minimal 'Publish Version 9' control area that collects the production slug, uses validateProductionSlug() to gate publishing, and renders the required English error message when missing/invalid; ensure the publish action is blocked until valid. Use existing shadcn-ui-based UI primitives already used in this file (Button/Input/Label/Sheet/ScrollArea) to keep styling consistent. Verify the component's usage instructions before implementing."
         }
       ]
     }

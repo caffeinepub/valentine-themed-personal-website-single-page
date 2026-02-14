@@ -11,9 +11,12 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Edit, Plus, Trash2, Upload, RotateCcw, Image as ImageIcon } from 'lucide-react';
+import { Edit, Plus, Trash2, Upload, RotateCcw, Image as ImageIcon, Rocket } from 'lucide-react';
 import { ValentineContent } from '@/valentine/types';
 import { useState, useRef, ChangeEvent } from 'react';
+import { validateProductionSlug } from '@/utils/validateProductionSlug';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Separator } from '@/components/ui/separator';
 
 interface EditPanelProps {
   content: ValentineContent;
@@ -33,6 +36,9 @@ export function EditPanel({
   isCustomImage 
 }: EditPanelProps) {
   const [localContent, setLocalContent] = useState(content);
+  const [productionSlug, setProductionSlug] = useState('');
+  const [slugError, setSlugError] = useState('');
+  const [isPublishing, setIsPublishing] = useState(false);
   const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   // Normalize memoryCaptions to always have exactly 6 slots
@@ -46,6 +52,37 @@ export function EditPanel({
 
   const handleSave = () => {
     onUpdate(localContent);
+  };
+
+  const handlePublish = () => {
+    const validation = validateProductionSlug(productionSlug);
+    
+    if (!validation.valid) {
+      setSlugError(validation.error);
+      return;
+    }
+
+    // Clear any previous errors
+    setSlugError('');
+    setIsPublishing(true);
+
+    // TODO: Implement actual publish logic here
+    // For now, just simulate the publish action
+    console.log('Publishing to production with slug:', productionSlug);
+    
+    // Simulate async operation
+    setTimeout(() => {
+      setIsPublishing(false);
+      alert(`Ready to publish Version 9 with slug: ${productionSlug}`);
+    }, 1000);
+  };
+
+  const handleSlugChange = (value: string) => {
+    setProductionSlug(value);
+    // Clear error when user starts typing
+    if (slugError) {
+      setSlugError('');
+    }
   };
 
   const addReason = () => {
@@ -109,6 +146,54 @@ export function EditPanel({
         
         <ScrollArea className="h-[calc(100vh-180px)] pr-4 mt-6">
           <div className="space-y-6">
+            {/* Publish Section */}
+            <div className="space-y-4 p-4 border rounded-lg bg-muted/30">
+              <div className="flex items-center gap-2">
+                <Rocket className="w-5 h-5 text-primary" />
+                <h3 className="font-semibold text-lg">Publish Version 9</h3>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Enter a production slug to publish your Valentine site live.
+              </p>
+              
+              <div>
+                <Label htmlFor="production-slug">Production Slug</Label>
+                <Input
+                  id="production-slug"
+                  value={productionSlug}
+                  onChange={(e) => handleSlugChange(e.target.value)}
+                  placeholder="my-valentine-2026"
+                  className={slugError ? 'border-destructive' : ''}
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  5–50 characters: letters, numbers, and hyphens only
+                </p>
+              </div>
+
+              {slugError && (
+                <Alert variant="destructive">
+                  <AlertDescription>{slugError}</AlertDescription>
+                </Alert>
+              )}
+
+              <Button 
+                onClick={handlePublish} 
+                disabled={isPublishing}
+                className="w-full"
+              >
+                {isPublishing ? (
+                  <>Publishing...</>
+                ) : (
+                  <>
+                    <Rocket className="w-4 h-4 mr-2" />
+                    Publish to Production
+                  </>
+                )}
+              </Button>
+            </div>
+
+            <Separator />
+
             {/* Names */}
             <div className="space-y-4">
               <div>
@@ -208,7 +293,7 @@ export function EditPanel({
                   return (
                     <div key={index} className="border rounded-lg p-3 space-y-2">
                       <div className="flex items-center gap-3">
-                        <div className="w-16 h-16 rounded overflow-hidden bg-muted shrink-0">
+                        <div className="relative w-20 h-20 rounded overflow-hidden bg-muted flex-shrink-0">
                           <img
                             src={src}
                             alt={`Memory ${index + 1}`}
@@ -216,10 +301,8 @@ export function EditPanel({
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <Label className="text-xs text-muted-foreground">
-                            Photo {index + 1}
-                          </Label>
-                          <div className="flex gap-2 mt-1">
+                          <p className="text-sm font-medium mb-1">Photo {index + 1}</p>
+                          <div className="flex gap-2">
                             <Button
                               size="sm"
                               variant="outline"
@@ -227,7 +310,7 @@ export function EditPanel({
                               className="flex-1"
                             >
                               <Upload className="w-3 h-3 mr-1" />
-                              {isCustomImage(index) ? 'Change' : 'Upload'}
+                              Upload
                             </Button>
                             {isCustomImage(index) && (
                               <Button
@@ -242,9 +325,9 @@ export function EditPanel({
                         </div>
                       </div>
                       <Input
+                        placeholder="Add a caption (optional)"
                         value={caption}
                         onChange={(e) => updateCaption(index, e.target.value)}
-                        placeholder="Add a caption..."
                         className="text-sm"
                       />
                       <input
@@ -253,8 +336,8 @@ export function EditPanel({
                         }}
                         type="file"
                         accept="image/*"
-                        onChange={(e) => handleFileSelect(index, e)}
                         className="hidden"
+                        onChange={(e) => handleFileSelect(index, e)}
                       />
                     </div>
                   );
@@ -264,12 +347,8 @@ export function EditPanel({
           </div>
         </ScrollArea>
 
-        <div className="absolute bottom-0 left-0 right-0 p-6 bg-background border-t">
-          <Button 
-            onClick={handleSave} 
-            className="w-full"
-            size="lg"
-          >
+        <div className="absolute bottom-0 left-0 right-0 p-6 border-t bg-background">
+          <Button onClick={handleSave} className="w-full">
             Save Changes
           </Button>
         </div>

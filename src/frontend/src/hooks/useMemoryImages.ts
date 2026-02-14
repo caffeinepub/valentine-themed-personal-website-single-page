@@ -10,20 +10,6 @@ const DEFAULT_IMAGES = [
 ];
 
 const STORAGE_KEY = 'valentine-memory-images';
-const OLD_PLACEHOLDER = '/assets/generated/memory-06.dim_1200x800.png';
-
-// Normalize asset paths to ensure they work when served from site root
-function normalizeAssetPath(path: string): string {
-  // Leave data URLs untouched
-  if (path.startsWith('data:')) {
-    return path;
-  }
-  // Ensure root-absolute path for static assets
-  if (path.startsWith('assets/')) {
-    return '/' + path;
-  }
-  return path;
-}
 
 export function useMemoryImages() {
   const [images, setImages] = useState<string[]>(() => {
@@ -32,14 +18,7 @@ export function useMemoryImages() {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length === 6) {
-          // Migration: replace old placeholder with new real photo
-          const migrated = parsed.map((img, idx) => {
-            if (idx === 5 && img === OLD_PLACEHOLDER) {
-              return DEFAULT_IMAGES[5];
-            }
-            return normalizeAssetPath(img);
-          });
-          return migrated;
+          return parsed;
         }
       }
     } catch (error) {

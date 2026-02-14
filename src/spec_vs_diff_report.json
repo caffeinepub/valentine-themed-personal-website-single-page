@@ -1,33 +1,40 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T23:51:09.093Z",
-  "summary": "Diff implements safer array handling in MemoriesGallery and EditPanel (normalizing to 6 slots) and improves DeploymentHealthOverlay to render failed groups/assets without crashing. However, the diff summary does not include changes to the asset smoke-check logic itself nor provides evidence that all TypeScript build errors across the frontend are resolved.",
+  "generatedAt": "2026-02-14T00:09:35.642Z",
+  "summary": "REQ-20 slug validation logic was added via a new utility and is invoked in the Version 9 publish handler to block publishing when invalid. However, the diff snippet does not conclusively show that the error is rendered as a user-facing message in the UI (the render section is truncated). A few extra changes appear unrelated to the specific request (simulated publish/alert flow and meta/state summary files).",
   "missing_requirements": [
     {
-      "id": "REQ-15",
-      "requirement": "Fix all TypeScript/compile-time errors in Draft Version 7 so the frontend builds successfully (no TS errors, including React event handler type usage under automatic JSX runtime).",
-      "reason": "The diff shows one likely TS fix (importing `ChangeEvent` from `react` in EditPanel), but there is no evidence in the provided diff summary that *all* TS/compile-time errors across the frontend were resolved or that the project builds successfully.",
+      "id": "REQ-20",
+      "requirement": "If the requested production slug is missing or invalid, block publishing and show a clear, user-facing error message in English explaining the rule and requesting a corrected slug.",
+      "reason": "While validation is performed and publishing is blocked (early return), the provided EditPanel diff is truncated before the JSX that would display `slugError`. The diff summary does not definitively show the error message being rendered to the user.",
       "evidence": [
-        "frontend/src/components/valentine/EditPanel.tsx"
-      ]
-    },
-    {
-      "id": "REQ-17",
-      "requirement": "Ensure the production asset smoke-check does not produce false negatives due to pathing/missing assets; asset URLs should be root-absolute (/assets/...), and the app should load normally when required assets exist.",
-      "reason": "While the overlay UI was updated to list failed groups/assets, the diff summary provides no actual code changes for the production asset smoke-check implementation (e.g., URL construction, root-absolute pathing, grouping/diagnostics), so the false-negative/pathing fixes cannot be verified from this diff.",
-      "evidence": [
-        "frontend/src/components/valentine/DeploymentHealthOverlay.tsx"
+        "frontend/src/components/valentine/EditPanel.tsx (truncated)"
       ]
     }
   ],
-  "hallucinated_features": [],
-  "confidence": 0.62,
+  "hallucinated_features": [
+    {
+      "description": "Simulated publish behavior (console.log + setTimeout + alert) instead of/alongside real publish flow.",
+      "reason": "REQ-20 only requires validation and blocking/allowing publish based on slug validity; it does not request adding a simulated publish action or alert dialogs.",
+      "evidence": [
+        "frontend/src/components/valentine/EditPanel.tsx (truncated)"
+      ]
+    },
+    {
+      "description": "Added/updated meta documentation/state files (frontend-file-summaries.txt, project_state.json) unrelated to slug validation.",
+      "reason": "BuildRequest only asks for production slug validation behavior when publishing Version 9; these meta/state summary updates are not requested requirements.",
+      "evidence": [
+        "frontend-file-summaries.txt",
+        "project_state.json"
+      ]
+    }
+  ],
+  "confidence": 0.64,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/valentine/DeploymentHealthOverlay.tsx",
     "frontend/src/components/valentine/EditPanel.tsx",
-    "frontend/src/components/valentine/MemoriesGallery.tsx",
+    "frontend/src/utils/validateProductionSlug.ts",
     "project_state.json"
   ]
 }

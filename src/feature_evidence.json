@@ -2,29 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-fix-all-typescript-compile-time-errors-in-draft-version-7-so-the-frontend-builds-successfully",
-      "featureTitle": "Fix all TypeScript/compile-time errors in Draft Version 7 so the frontend builds successfully.",
-      "files": [
-        "frontend/src/components/valentine/EditPanel.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-15"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-fix-runtime-errors-and-edge-cases-in-the-memories-gallery-and-edit-panel-so-the-app-never-crashes-if-images-memorycaptions-or-reasons-arrays-are-shorter-longer-than-expected-including-avoiding-negative-length-array-creation-and-out-of-bounds-indexing",
-      "featureTitle": "Fix runtime errors and edge cases in the Memories gallery and Edit Panel so the app never crashes if `images`, `memoryCaptions`, or `reasons` arrays are shorter/longer than expected (including avoiding negative-length array creation and out-of-bounds indexing).",
+      "featureId": "feature-when-publishing-version-9-ensure-the-production-domain-slug-used-for-the-live-deployment-passes-validation-5-50-characters-only-letters-numbers-and-hyphens-if-the-requested-slug-is-missing-or-invalid-block-publishing-and-show-a-clear-user-facing-error-message-in-english-explaining-the-rule-and-requesting-a-corrected-slug",
+      "featureTitle": "When publishing Version 9, ensure the production domain/slug used for the live deployment passes validation (5–50 characters; only letters, numbers, and hyphens). If the requested slug is missing or invalid, block publishing and show a clear, user-facing error message in English explaining the rule and requesting a corrected slug.",
       "files": [
         "frontend/src/components/valentine/EditPanel.tsx",
-        "frontend/src/components/valentine/MemoriesGallery.tsx"
+        "frontend/src/utils/validateProductionSlug.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -34,25 +16,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-16"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-ensure-the-production-asset-smoke-check-and-its-failure-ui-do-not-produce-false-negatives-due-to-pathing-or-missing-assets-and-that-the-app-loads-normally-when-all-required-static-assets-exist-under-frontend-public-assets",
-      "featureTitle": "Ensure the production asset smoke-check and its failure UI do not produce false negatives due to pathing or missing assets, and that the app loads normally when all required static assets exist under `frontend/public/assets/`.",
-      "files": [
-        "frontend/src/components/valentine/DeploymentHealthOverlay.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-17"
+        "REQ-20"
       ],
       "confidence": "high"
     }
